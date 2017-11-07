@@ -30,7 +30,14 @@ export class AppComponent {
   }
 
   signUp() {
-    this.userService.register(this.user);
+    this.userService.register(this.user)
+    .subscribe(
+      () => {
+        alert("Your account was successfully created.");
+        this.toggleDisplay();
+      },
+      () => alert("Unfortunately we were unable to create your account.");
+    )
   }
 
   toggleDisplay() {
