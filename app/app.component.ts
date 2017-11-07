@@ -1,8 +1,10 @@
+import { UserService } from "./shared/user/user.service";
 import { Component } from "@angular/core";
 import { User } from "./shared/user/user";
 
 @Component({
   selector: "my-app",
+  providers: [UserService],
   templateUrl:'./pages/login/login.html',
   styleUrls: ["pages/login/login-common.css", "pages/login/login.css"]
 })
@@ -12,11 +14,23 @@ export class AppComponent {
   isLoggingIn: boolean = true;
 
   // Methods
-  constructor() {
+  constructor(private userService: UserService) {
     this.user = new User();
   }
   submit() {
-    alert(this.user.email);
+    if (this.isLoggingIn) {
+      this.login();
+    } else {
+      this.signUp();
+    }
+  }
+
+  login() {
+    // TODO: Define
+  }
+
+  signUp() {
+    this.userService.register(this.user);
   }
 
   toggleDisplay() {
